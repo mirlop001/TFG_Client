@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { FoodCategoryModel } from '../_models/food-category.model';
 import { FoodModel } from '../_models/food.model';
 import { MealModel } from '../_models/meal.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,23 +24,23 @@ export class FoodService {
 
   /* FOOD TYPE */
   getFoodList() {
-	return this.http.get<FoodCategoryModel[]>(`http://localhost:8080/api/food`, { headers: this.headers });
+	return this.http.get<FoodCategoryModel[]>(`${environment.apiUrl}/food`, { headers: this.headers });
   }
 
   getFavourites() {
-	return this.http.get<FoodModel[]>(`http://localhost:8080/api/food/favourites`, { headers: this.headers });
+	return this.http.get<FoodModel[]>(`${environment.apiUrl}/food/favourites`, { headers: this.headers });
 
   }
 
   saveMeal(food) {
-    return this.http.post<MealModel>(`http://localhost:8080/api/food/meal`, food, { headers: this.headers });
+    return this.http.post<MealModel>(`${environment.apiUrl}/food/meal`, food, { headers: this.headers });
   }
 
   saveFavourites(foodIdList) {
-    return this.http.post<Boolean>(`http://localhost:8080/api/food/favourites`,{ foodList: foodIdList }, { headers: this.headers });
+    return this.http.post<Boolean>(`${environment.apiUrl}/food/favourites`,{ foodList: foodIdList }, { headers: this.headers });
   }
 
   getComplexHC() {
-	  return this.http.get<FoodCategoryModel[]>(`http://localhost:8080/api/food/complex`, { headers: this.headers })
+	  return this.http.get<FoodCategoryModel[]>(`${environment.apiUrl}/food/complex`, { headers: this.headers })
   }
 }

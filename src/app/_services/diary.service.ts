@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActionResultModel } from '../_models/action-result.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +22,24 @@ export class DiaryService {
 
 	//Food diary
 	saveMeal(meal) {
-		return this.http.post(`http://localhost:8080/api/meal-diary`, meal );
+		return this.http.post(`${environment.apiUrl}/meal-diary`, meal );
 	}
 
 	//Glucose diary
 	saveGlucose(glucose) {
-		return this.http.post<ActionResultModel>(`http://localhost:8080/api/glucose-diary`, glucose, { headers: this.headers });
+		return this.http.post<ActionResultModel>(`${environment.apiUrl}/glucose-diary`, glucose, { headers: this.headers });
 	}
 
 	getInsulinDiary(date) {
-		return this.http.post(`http://localhost:8080/api/diary/insulin`, {date: date}, { headers: this.headers });
+		return this.http.post(`${environment.apiUrl}/diary/insulin`, {date: date}, { headers: this.headers });
 	}
 
 	//Insulin diary
 	getInsulinTypes() {
-		return this.http.get(`http://localhost:8080/api/insulin`);
+		return this.http.get(`${environment.apiUrl}/insulin`);
 	}
 
 	saveInsulin(insulin) {
-		return this.http.post(`http://localhost:8080/api/insulin-diary`, insulin, { headers: this.headers });
+		return this.http.post(`${environment.apiUrl}/insulin-diary`, insulin, { headers: this.headers });
 	}
 }
