@@ -1,0 +1,80 @@
+<div mat-dialog-title>
+	<h1>Añadir {{selectedMealType}}</h1>
+	<div class="row p-1 justify-content-center">
+		<mat-button-toggle-group name="fontStyle" aria-label="Font Style" [(value)]="selectedMealType">
+			<mat-button-toggle value="Desayuno">Desayuno</mat-button-toggle>
+			<mat-button-toggle value="Comida">Comida</mat-button-toggle>
+			<mat-button-toggle value="Merienda">Merienda</mat-button-toggle>
+			<mat-button-toggle value="Cena">Cena</mat-button-toggle>
+		</mat-button-toggle-group>
+	</div>
+	<div class="row d-flex flex-column mt-4">
+		<mat-divider></mat-divider>
+		<small class="pl-2 pr-2">Favoritos</small>
+
+		<div id="fav-list" class="d-flex pt-3 pb-3">
+			<!-- <img src="{{fav.picture}}" alt="" srcset=""> -->
+			<div class="fav-item new">
+				<img class="m-1" src="https://picsum.photos/200" alt="Añadir nuevo favorito" srcset="" (click)="openFoodList(true)">
+				<p>Nuevo</p>
+			</div>
+
+			<div *ngFor="let fav of favourites" class="fav-item">
+				<img class="m-1" src="https://picsum.photos/200" alt="{{fav.name}} guardado como favorito" srcset="" (click)="addNewMeal(fav)">
+				<p>{{fav.name}}</p>
+			</div>
+		</div>
+
+		<mat-divider></mat-divider>
+	</div>
+</div>
+
+<mat-dialog-content class="mat-typography">
+	<div class="row pb-3 justify-content-between">
+		<button mat-raised-button color="primary" class="col-6"  (click)="openFoodList()">
+			<mat-icon>add</mat-icon>
+			Añadir alimento
+		</button>
+
+		<button mat-raised-button color="accent" class="offset-1 col-5" (click)="addHC()">
+			<mat-icon>add</mat-icon>
+			Añadir HC
+		</button>
+	</div>
+
+	<div class="row">
+		<div id="meal-list" class="mt-2 w-100 d-flex flex-column">
+			<div class="row meal d-flex" *ngFor="let meal of meals">
+				<ng-container *ngIf="meal.foodItem">
+					<mat-icon class="text-center col-1 p-0 mr-2" (click)="removeMeal(meal)">clear</mat-icon>
+					<!-- <img class=" col-2 p-0 m-1" src="{{meal.foodItem.picture}}" > -->
+					
+					<div class="col-2 p-0">
+						<img class="m-1" src="https://picsum.photos/200" srcset="">
+					</div>
+					<span class="col-4 pr-2">{{ meal.foodItem.name }} </span>
+				
+					<mat-form-field class="col-2 p-0">
+						<mat-label>Gramos</mat-label>
+						<input matInput type="number" class="text-right" [(ngModel)]="meal.grams" min=0>
+					</mat-form-field>
+
+					<span class="m-auto col-3"> = {{ meal.HCGrams }}g de HC</span>
+				</ng-container>
+
+				<ng-container *ngIf="!meal.foodItem">
+					<mat-icon class="text-center col-1 p-0 m-auto mr-2" (click)="removeMeal(meal)">clear</mat-icon>
+					<mat-form-field class="col-8">
+						<input matInput type="number" class="text-right" [(ngModel)]="meal.grams" min=0>
+					</mat-form-field>
+					<span class="m-auto p-0 col-3"> {{ meal.HCGrams }}g de HC</span>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button cdkFocusInitial (click)="openConfirmation()">Guardar</button>
+</mat-dialog-actions>

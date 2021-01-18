@@ -1,0 +1,44 @@
+<div mat-dialog-title>
+	<mat-form-field class="example-full-width w-100">
+		<mat-label>Buscar por nombre</mat-label>
+		<input type="text"
+				placeholder="Ej: Aguacate"
+				matInput
+				[(ngModel)]="nameFilter"
+				autocomplete="off">
+				<mat-icon matSuffix>search</mat-icon>
+	</mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  	<div id="food-list" class="d-flex flex-column" *ngFor="let category of data.foodList">
+		<ng-container *ngIf="category.foodList.length">
+			<h2 class="p-0">{{ category.name }}</h2>
+
+			<div class="d-flex flex-column">
+				<ng-container *ngFor="let food of category.foodList | filter: { attrName: 'name', value: nameFilter }">
+					<div [class.selected]="food.isSelected"  [class.selectable]="!justFavourites" class="d-flex food-item">
+						<mat-icon color="primary" class="text-center p-0 col-1" *ngIf="food.isFavourite" (click)="setFavourite(food)">favorite</mat-icon>
+						<mat-icon class="col-1 p-0 text-center" *ngIf="!food.isFavourite" (click)="setFavourite(food)">favorite_border</mat-icon>
+
+						<div class="d-flex w-100" (click)="selectFood(food)">
+							<div class="col-md-1  col-sm-2 p-0">
+								<img class="m-1" src="https://picsum.photos/200" srcset="">
+							</div>
+							<h3 class="col-5">{{ food.name }}</h3>
+
+							<span class="col-5 p-0 text-right">{{ food.gramsPerCarbRatio }} g HC/100g</span>
+						</div>
+						
+						<mat-icon class="col-1 p-0"  placement="top" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top">info_outline</mat-icon>
+					</div>
+				</ng-container>
+			</div>
+		</ng-container>
+  	</div>
+
+</div>
+<div mat-dialog-actions  align="end">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]="foodList">Guardar</button>
+</div>

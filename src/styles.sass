@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Philosopher&family=Poiret+One&display=swap")
+
+$principal-font: 'Poiret One', cursive
+$secondary-font: 'Open Sans Condensed', sans-serif
+$regular-font: 'Philosopher', sans-serif
+
+h1,
+h2,
+h3,
+a
+	font-family: $principal-font !important
+
+h4,
+h5,
+h6,
+label,
+button
+	font-family: $secondary-font !important
+
+button
+	outline: none !important
+
+span,
+input,
+textarea,
+p,
+small
+	font-family: $regular-font !important
+
+::-webkit-scrollbar
+	width: 8px
+
+::-webkit-scrollbar-track
+	border-radius: 10px
+
+::-webkit-scrollbar-thumb
+	background: rgb(255 153 0 / 34%)
+	border-radius: 10px
+
+body
+	width: 100vw
+	height: 100vh
+	overflow: hidden
+	min-width: 450px
+	background-color: #8e24aa24
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap'

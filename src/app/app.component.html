@@ -1,0 +1,49 @@
+<div class="container">
+	<div id="menu-top">
+		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a vertical three dot icon">
+			<mat-icon>store</mat-icon>
+		</button>
+
+		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon">
+			<mat-icon>inventory_2</mat-icon>
+		</button>
+		
+		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon">
+			<mat-icon>settings</mat-icon>
+		</button>
+	</div>
+
+	<div id="coins">
+		<h1>{{ coins }}</h1>
+		<img [src]="('../../assets/others/miuro.png')">
+	</div>
+
+	<div id="avatar">
+		<div id="avatar-container">
+			<img [src]="('../../assets/avatar/') + avatarStatus + ('.png')">
+		</div>
+	</div>
+
+	<div id="menu-bottom">
+		<div class="button-row p-3 d-flex justify-content-center">
+			<button color="accent" class="mr-3" mat-fab aria-label="Example icon-button with a heart icon" [disabled]="menuType" (click)="openDialog('food')">
+				<mat-icon>local_dining</mat-icon>
+			</button>
+			
+			<button color="accent" class="mr-3" mat-fab [disabled]="menuType" aria-label="Example icon-button with a heart icon"  (click)="openDialog('glucose')">
+				<mat-icon>opacity</mat-icon>
+			</button>
+			
+			<button color="accent" class="mr-3" mat-fab [disabled]="menuType" aria-label="Example icon-button with a heart icon">
+				<mat-icon>colorize</mat-icon>
+			</button>
+
+			<button color="primary" class="mr-3" class="diary" [disabled]="menuType" mat-fab aria-label="Example icon-button with a heart icon">
+				<mat-icon>menu_book</mat-icon>
+			</button>
+		</div>
+	</div>
+
+</div>
+
+	  

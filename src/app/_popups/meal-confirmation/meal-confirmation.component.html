@@ -1,0 +1,14 @@
+<div mat-dialog-title>
+	<h1>Estos son los cambios realizados, ¿Quieres continuar?</h1>
+</div>
+
+<div mat-dialog-content>
+  	<ul *ngFor="let meal of data.meals">
+		<li>{{meal.grams}}</li>
+	</ul>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">No</button>
+  <button mat-button cdkFocusInitial [mat-dialog-close]=true >Si</button>
+</div>

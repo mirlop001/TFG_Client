@@ -1,0 +1,61 @@
+@import "../../_variables"
+
+.mat-dialog-title, .mat-dialog-content
+	font-size: initial !important
+	overflow-x: hidden
+	padding: 0 1rem
+
+	.row
+		position: relative
+		padding: 0 1rem
+
+		img
+			max-width: 3rem
+			max-height: 3rem
+			width: 100%
+			border-radius: 100%
+
+		small
+			position: absolute
+			top: -1rem
+			background-color: white
+			left: 1rem
+
+		#fav-list
+			overflow-y: hidden
+			overflow-x: auto
+			flex-wrap: nowrap
+
+			.new.fav-item
+				color: $primary
+				font-weight: bold
+
+				img
+					border: 3px dotted $primary-hover
+
+			.fav-item
+				max-width: 4rem
+				text-align: center
+				margin: 0 .1rem
+
+				img:hover
+					border: 3px solid $primary-hover
+					cursor: pointer
+				p
+					width: 100%
+					white-space: nowrap
+					overflow: hidden
+					text-overflow: ellipsis
+					font-size: small
+					margin: 0 !important
+
+		.meal
+			span, .mat-icon
+				margin: auto 0 !important
+
+			.mat-icon
+				cursor: pointer
+
+.mat-dialog-content
+	margin: 0 !important
+	min-height: 50vh
