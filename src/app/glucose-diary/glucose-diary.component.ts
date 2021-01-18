@@ -14,7 +14,7 @@ export class GlucoseDiaryComponent {
 	comments: string;
 
 	constructor(
-		public dialogRef: MatDialogRef<MealConfirmationComponent>,
+		public dialogRef: MatDialogRef<GlucoseDiaryComponent>,
 		public dialog: MatDialog,
 		public diaryService: DiaryService
 	) { }

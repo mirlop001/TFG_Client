@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActionResultModel } from '../_models/action-result.model';
 import { environment } from '../../environments/environment';
+import { InsulinTypeModel } from '../_models/insulin-types.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class DiaryService {
 
 	//Insulin diary
 	getInsulinTypes() {
-		return this.http.get(`${environment.apiUrl}/insulin`);
+		return this.http.get<InsulinTypeModel[]>(`${environment.apiUrl}/insulin`);
 	}
 
 	saveInsulin(insulin) {

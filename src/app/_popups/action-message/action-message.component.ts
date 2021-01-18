@@ -20,7 +20,12 @@ export class ActionMessageComponent implements OnInit {
 	}
 
 	showNextSlide() {
-		this.currentSlide = "action-response";
+		if(this.data.isAction)
+			this.currentSlide = "action-response";
+
+		else {
+			this.dialogRef.close();
+		}
 	}
 
 }

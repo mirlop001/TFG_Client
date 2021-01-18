@@ -5,7 +5,6 @@ import { MealModel } from '../_models/meal.model';
 import { FoodCategoryModel } from '../_models/food-category.model';
 import { FoodService } from '../_services/food.service';
 import { FoodSelectorComponent } from './food-selector/food-selector.component';
-import { identifierModuleUrl } from '@angular/compiler';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
 
 @Component({

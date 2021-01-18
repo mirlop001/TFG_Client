@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
+import {MatSelectModule} from '@angular/material/select';
 import {MatDividerModule} from '@angular/material/divider';
 
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
@@ -27,6 +28,7 @@ import { MealConfirmationComponent } from './_popups/meal-confirmation/meal-conf
 import { NotificationComponent } from './_popups/notification/notification.component';
 import { GlucoseDiaryComponent } from './glucose-diary/glucose-diary.component';
 import { ActionMessageComponent } from './_popups/action-message/action-message.component';
+import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { ActionMessageComponent } from './_popups/action-message/action-message.
 		NotificationComponent,
 		GlucoseDiaryComponent,
 		ActionMessageComponent,
+		InsulinDiaryComponent,
 	],
 	imports: [
 		MobxAngularModule,
@@ -55,6 +58,7 @@ import { ActionMessageComponent } from './_popups/action-message/action-message.
 		MatInputModule,
 		MatIconModule,
 		MatDividerModule,
+		MatSelectModule,
 		NgbModule
 	],
 	providers: [
