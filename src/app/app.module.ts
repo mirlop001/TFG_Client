@@ -9,6 +9,7 @@ import { MobxAngularModule } from 'node_modules/mobx-angular';
 import { NgInitDirective } from './_heplers/init-directive';
 import { FilterPipe } from './_pipes/filter.pipe';
 
+import { AppRoutingModule } from './app-routing.module';
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
 
 import {MatButtonModule} from '@angular/material/button';
@@ -35,6 +36,9 @@ import { ActionMessageComponent } from './_popups/action-message/action-message.
 import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.component';
 import { DiaryComponent } from './diary/diary.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -51,9 +55,13 @@ import { DiaryComponent } from './diary/diary.component';
 		InsulinDiaryComponent,
 		DiaryTimelineComponent,
 		DiaryComponent,
+		HomeComponent,
+		LoginComponent,
+		SignupComponent,
 	],
 	imports: [
 		MobxAngularModule,
+		AppRoutingModule,
 		HttpClientModule,
 		BrowserModule,
 		BrowserAnimationsModule,

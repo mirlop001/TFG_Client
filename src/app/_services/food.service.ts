@@ -10,10 +10,10 @@ import { environment } from '../../environments/environment';
 })
 export class FoodService {
 	private headers;
-	private user = '5f7c06edeef17346d4552129';
+	private user = null;
 
   constructor(private http: HttpClient) {
-		  // this.user = JSON.parse(localStorage.getItem("user-logged"))?.user;
+		  this.user = JSON.parse(localStorage.getItem("user-logged"))?.user;
 		  this.headers = {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',

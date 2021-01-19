@@ -7,7 +7,6 @@ import { DiaryModel } from 'src/app/_models/diary.model';
 import * as moment from 'moment'; 
 import { InsulinModel } from '../_models/insulin.model';
 import { GlucoseModel } from '../_models/glucose.model';
-import { MealModel } from '../_models/meal.model';
 import { MealDiaryModel } from '../_models/meal-diary.model';
 
 @Component({
