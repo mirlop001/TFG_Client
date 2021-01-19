@@ -6,9 +6,9 @@ import { FoodCategoryModel } from '../_models/food-category.model';
 import { FoodService } from '../_services/food.service';
 import { FoodSelectorComponent } from './food-selector/food-selector.component';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
-import * as moment from 'moment'; 
-import { ConfirmationModel } from '../_models/confirmation.model';
 import { MealDiaryModel } from '../_models/meal-diary.model';
+import { DiaryService } from '../_services/diary.service';
+import { ActionResultModel } from '../_models/action-result.model';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +27,7 @@ export class FoodDiaryComponent implements OnInit {
 		public dialogRef: MatDialogRef<FoodDiaryComponent>,
 		public dialog: MatDialog,
 		private foodService: FoodService,
+		private diaryService: DiaryService,
 		private cdr: ChangeDetectorRef,
 	) {}
 
@@ -84,8 +85,10 @@ export class FoodDiaryComponent implements OnInit {
 	
 		dialogRef.afterClosed().subscribe(result => {
 			if(result) {
-				this.saveMeal();
-				this.dialogRef.close(true);
+				this.diaryService.saveMeal({ meals: this.meals, mealType: this.selectedMealType })
+					.subscribe(res => {
+						this.dialogRef.close(new ActionResultModel().deserialize(res));
+					});
 			}
 		});
 	}
@@ -132,12 +135,5 @@ export class FoodDiaryComponent implements OnInit {
 			}
 			console.log('The dialog was closed');
 		});
-	}
-
-	saveMeal() {
-		this.foodService.saveMeal({ meals: this.meals, mealType: this.selectedMealType })
-			.subscribe(res => {
-				console.log(res);
-			});
 	}
 }

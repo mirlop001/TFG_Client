@@ -32,10 +32,6 @@ export class FoodService {
 
   }
 
-  saveMeal(food) {
-    return this.http.post<MealModel>(`${environment.apiUrl}/food/meal`, food, { headers: this.headers });
-  }
-
   saveFavourites(foodIdList) {
     return this.http.post<Boolean>(`${environment.apiUrl}/food/favourites`,{ foodList: foodIdList }, { headers: this.headers });
   }

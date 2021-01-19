@@ -30,7 +30,7 @@ export class DiaryService {
 	}
 
 	saveMeal(meal) {
-		return this.http.post(`${environment.apiUrl}/meal`, meal );
+		return this.http.post(`${environment.apiUrl}/meal`, meal, { headers: this.headers } );
 	}
 
 	//Glucose diary

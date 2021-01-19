@@ -7,7 +7,7 @@ export class UserModel {
     public password: string;
     public token: string;
 	public coins: number;
-	public currentActionResult: ActionResultModel;
+	public currentAction: ActionResultModel;
 
     deserialize(data: any) {
         Object.assign(this, data);
@@ -15,6 +15,6 @@ export class UserModel {
 	}
 	
     @computed get avatarStatus () {
-        return this.currentActionResult && this.currentActionResult.status? this.currentActionResult.status : 'neutro';
+        return this.currentAction && this.currentAction.status? this.currentAction.status : 'neutral';
     }
 }

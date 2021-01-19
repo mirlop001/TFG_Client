@@ -8,6 +8,7 @@ import { ActionResultModel } from '../_models/action-result.model';
 import { ActionMessageComponent } from '../_popups/action-message/action-message.component';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NotificationComponent } from '../_popups/notification/notification.component';
+import { UserModel } from '../_models/user.model';
 
 @Component({
 selector: 'app-home',
@@ -20,7 +21,7 @@ export class HomeComponent implements OnInit{
 	avatarStatus = "neutral";
 	avatarStatuses = ["neutral","sad", "happy"];
 
-	currentActionResult: ActionResultModel;
+	currentAction: ActionResultModel;
 	menuType = null;
 	
 	coins = 0;
@@ -30,8 +31,10 @@ export class HomeComponent implements OnInit{
 	ngOnInit() {
 		this.authenticationService.getUserInformation()
 		.subscribe((userInfoResponse) => {
-			this.coins = userInfoResponse.coins;
-			this.currentActionResult = userInfoResponse.currentActionResult;
+			let userInfo = new UserModel().deserialize(userInfoResponse);
+			this.coins = userInfo.coins;
+			this.currentAction = userInfo.currentAction;
+			this.avatarStatus = userInfo.avatarStatus;
 		});
 	}
 
@@ -67,6 +70,7 @@ export class HomeComponent implements OnInit{
 					if(result instanceof ActionResultModel) {
 						this.openNotification(ActionMessageComponent, result);
 						this.coins += result.prize;
+						this.avatarStatus = result.status;
 
 					} else {
 						this.openNotification(NotificationComponent, {
