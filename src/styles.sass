@@ -1,10 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Open+Sans+Condensed:ital,wght@0,300;0,700;1,300&family=Philosopher&family=Poiret+One&display=swap")
-
-$principal-font: 'Poiret One', cursive
-$secondary-font: 'Open Sans Condensed', sans-serif
-$regular-font: 'Philosopher', sans-serif
+@import '_variables'
 
 h1,
 h2,
@@ -27,7 +24,6 @@ input,
 textarea,
 p,
 small
-	font-family: $regular-font !important
 
 ::-webkit-scrollbar
 	width: 8px
@@ -36,7 +32,7 @@ small
 	border-radius: 10px
 
 ::-webkit-scrollbar-thumb
-	background: rgb(255 153 0 / 34%)
+	background: $primary-hover
 	border-radius: 10px
 
 body
@@ -45,5 +41,22 @@ body
 	overflow: hidden
 	min-width: 450px
 	background-color: #8e24aa24
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap'
+
+.popover
+	.popover-header
+		background: none !important
+		border: 0  !important
+		padding: 0  !important
+		border-bottom: 1px solid #ccc !important
+		margin: .5rem 1rem !important
+		font-weight: bold
+
+	.popover-body
+		max-height: 5rem
+		overflow-y: auto
+
+		p
+			font-family: $principal-font !important

@@ -1,0 +1,19 @@
+<div id="timeline">
+	<div class="row">
+		<small>{{data.time}}</small>
+		<button mat-mini-fab class="popover-open" color="primary" aria-label="Example icon button with a menu icon"  
+			[ngbPopover]="popContent"
+			[autoClose]="false" 
+			triggers="manual" 
+			#p="ngbPopover" 
+			placement="right"
+			(ngInit)="p.open()" 
+			[popoverTitle]="data.title">
+			<mat-icon>{{data.icon}}</mat-icon>
+		  </button>
+	</div>
+</div>
+
+<ng-template #popContent>
+	<p *ngFor="let value of data.values">{{value}}</p>
+</ng-template>

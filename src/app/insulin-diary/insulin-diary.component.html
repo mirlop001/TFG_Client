@@ -14,7 +14,13 @@
 
 	<mat-form-field>
 		<mat-label>Unidades</mat-label>
-		<input matInput type="number" class="text-right" min=0 [(ngModel)]="quantity">
+		<input matInput 
+			type="number"
+			autocomplete="off" 
+			class="text-right" 
+			min=0 
+			[(ngModel)]="quantity">
+			
 	</mat-form-field>
 </div>
 

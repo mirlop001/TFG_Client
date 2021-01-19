@@ -6,6 +6,8 @@ import { FoodCategoryModel } from '../_models/food-category.model';
 import { FoodService } from '../_services/food.service';
 import { FoodSelectorComponent } from './food-selector/food-selector.component';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
+import * as moment from 'moment'; 
+import { ConfirmationModel } from '../_models/confirmation.model';
 
 @Component({
 	changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +49,7 @@ export class FoodDiaryComponent implements OnInit {
 	}
 
 	addNewMeal(favItem){
-		if(this.meals.findIndex((item) => { return item.foodItem._id == favItem._id; }) < 0){
+		if(this.meals.findIndex((item) => { return item.foodItem && item.foodItem._id == favItem._id; }) < 0){
 			this.meals.unshift(new MealModel().deserialize({ foodItem: favItem, grams: 0 }));
 			this.meals = [...this.meals];
 		}
@@ -72,11 +74,26 @@ export class FoodDiaryComponent implements OnInit {
 	}
 
 	openConfirmation() {
+		let totalHC = 0;
+		let messages = [];
+
+		this.meals.forEach((meal) => {
+			totalHC += meal.HCGrams;
+			let mealName = meal.foodItem? `${meal.foodItem.name}-`: '';
+
+			messages.push(`${mealName} ${meal.HCGrams}g HC`);
+		});
+
+		let confInfo = new ConfirmationModel().deserialize({
+			icon: 'opacity',
+			time: moment().format("hh:mm"),
+			title: `${this.selectedMealType} - ${totalHC} de HC`,
+			values: messages
+		});
+
 		const dialogRef = this.dialog.open(MealConfirmationComponent, {
 			hasBackdrop: true,
-			data: {
-				meals: this.meals
-			}
+			data: confInfo
 		});
 	
 		dialogRef.afterClosed().subscribe(result => {

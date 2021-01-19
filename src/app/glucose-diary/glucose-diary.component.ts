@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DiaryService } from '../_services/diary.service';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
 import { ActionResultModel } from '../_models/action-result.model';
+import { ConfirmationModel } from '../_models/confirmation.model';
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'app-glucose-diary',
@@ -24,13 +26,18 @@ export class GlucoseDiaryComponent {
 	}
 
 	openConfirmation() {
+		let confInfo = new ConfirmationModel().deserialize({
+			icon: 'opacity',
+			time: moment().format("hh:mm"),
+			title: "Resultados glucemia",
+			values: [`${this.glucoseValue}mg/dL`, this.comments]
+		});
+		
 		const dialogRef = this.dialog.open(MealConfirmationComponent, {
 			hasBackdrop: true,
-			data: {
-				glucose: this.glucoseValue,
-				comments: this.comments
-			}
+			data: confInfo
 		});
+		
 	
 		dialogRef.afterClosed().subscribe(result => {
 			if(result) {

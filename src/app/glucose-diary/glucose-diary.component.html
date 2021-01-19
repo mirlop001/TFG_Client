@@ -5,7 +5,7 @@
 <div mat-dialog-content>
 	<mat-form-field class="w-100">
 		<mat-label>Glucosa</mat-label>
-		<input type="text"
+		<input type="number"
 				matInput
 				[(ngModel)]="glucoseValue"
 				autocomplete="off">
@@ -14,7 +14,7 @@
 
 	<mat-form-field class="w-100">
 		<mat-label>Comentarios</mat-label>
-		<textarea matInput rows="4" [ngModel]="comments"></textarea>
+		<textarea matInput rows="4" [(ngModel)]="comments"></textarea>
 	  </mat-form-field>
 </div>
 

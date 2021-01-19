@@ -3,8 +3,10 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
 import { DiaryService } from '../_services/diary.service';
 import { InsulinTypeModel } from '../_models/insulin-types.model';
-import { InsulinModel } from '../_models/insulin.model';
 import { ActionResultModel } from '../_models/action-result.model';
+import { ConfirmationModel } from '../_models/confirmation.model';
+
+import * as moment from 'moment'; 
 
 @Component({
   selector: 'app-insulin-diary',
@@ -38,14 +40,23 @@ export class InsulinDiaryComponent implements OnInit {
 	}
 
 	openConfirmation() {
-		var newValue =  {
+		let newValue =  {
 			type: this.type,
 			quantity: this.quantity
 		};
 
+		let type = this.insulinTypes.find((ins) => { return ins._id == this.type; });
+
+		let confInfo = new ConfirmationModel().deserialize({
+			icon: 'colorize',
+			time: moment().format("hh:mm"),
+			title: "Insulina",
+			values: [`${this.quantity}u. de insulina ${type.name}`]
+		});
+
 		const dialogRef = this.dialog.open(MealConfirmationComponent, {
 			hasBackdrop: true,
-			data: newValue
+			data: confInfo
 		});
 	
 		dialogRef.afterClosed().subscribe(result => {

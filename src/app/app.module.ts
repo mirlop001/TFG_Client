@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MobxAngularModule } from 'node_modules/mobx-angular';
 
+import { NgInitDirective } from './_heplers/init-directive';
 import { FilterPipe } from './_pipes/filter.pipe';
 
 import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule } from '@angular/material/dialog';
@@ -17,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
@@ -29,11 +31,13 @@ import { NotificationComponent } from './_popups/notification/notification.compo
 import { GlucoseDiaryComponent } from './glucose-diary/glucose-diary.component';
 import { ActionMessageComponent } from './_popups/action-message/action-message.component';
 import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
+import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.component';
 
 
 @NgModule({
 	declarations: [
 		AppComponent,
+		NgInitDirective ,
 		FilterPipe,
 		FoodDiaryComponent,
 		FoodSelectorComponent,
@@ -42,6 +46,7 @@ import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 		GlucoseDiaryComponent,
 		ActionMessageComponent,
 		InsulinDiaryComponent,
+		DiaryTimelineComponent,
 	],
 	imports: [
 		MobxAngularModule,
@@ -59,6 +64,7 @@ import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 		MatIconModule,
 		MatDividerModule,
 		MatSelectModule,
+		MatListModule,
 		NgbModule
 	],
 	providers: [
