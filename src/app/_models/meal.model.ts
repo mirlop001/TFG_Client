@@ -8,6 +8,7 @@ export class MealModel implements Deserializable {
     public id: string;
     public foodItem: FoodModel;
     public grams:number = 0;
+    public createdAt: Date;
 
     deserialize(data: any) {
         Object.assign(this, data);

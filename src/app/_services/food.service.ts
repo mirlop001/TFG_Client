@@ -39,8 +39,5 @@ export class FoodService {
   saveFavourites(foodIdList) {
     return this.http.post<Boolean>(`${environment.apiUrl}/food/favourites`,{ foodList: foodIdList }, { headers: this.headers });
   }
-
-  getComplexHC() {
-	  return this.http.get<FoodCategoryModel[]>(`${environment.apiUrl}/food/complex`, { headers: this.headers })
-  }
+  
 }

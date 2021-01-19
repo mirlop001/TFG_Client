@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { ActionResultModel } from '../_models/action-result.model';
 import { environment } from '../../environments/environment';
 import { InsulinTypeModel } from '../_models/insulin-types.model';
+import { InsulinModel } from '../_models/insulin.model';
+import { GlucoseModel } from '../_models/glucose.model';
+import { MealModel } from '../_models/meal.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,25 +25,33 @@ export class DiaryService {
 	}
 
 	//Food diary
+	getMealDiary(date) {
+		return this.http.post<MealModel[]>(`${environment.apiUrl}/meal-diary`, { date: date }, { headers: this.headers });
+	}
+
 	saveMeal(meal) {
-		return this.http.post(`${environment.apiUrl}/meal-diary`, meal );
+		return this.http.post(`${environment.apiUrl}/meal`, meal );
 	}
 
 	//Glucose diary
-	saveGlucose(glucose) {
-		return this.http.post<ActionResultModel>(`${environment.apiUrl}/glucose-diary`, glucose, { headers: this.headers });
+	getGlucoseDiary(date) {
+		return this.http.post<GlucoseModel[]>(`${environment.apiUrl}/glucose-diary`, { date: date }, { headers: this.headers });
 	}
 
-	getInsulinDiary(date) {
-		return this.http.post(`${environment.apiUrl}/diary/insulin`, {date: date}, { headers: this.headers });
+	saveGlucose(glucose) {
+		return this.http.post<ActionResultModel>(`${environment.apiUrl}/glucose`, glucose, { headers: this.headers });
 	}
 
 	//Insulin diary
+	getInsulinDiary(date) {
+		return this.http.post<InsulinModel[]>(`${environment.apiUrl}/insulin-diary`, { date: date }, { headers: this.headers });
+	}
+
 	getInsulinTypes() {
-		return this.http.get<InsulinTypeModel[]>(`${environment.apiUrl}/insulin`);
+		return this.http.get<InsulinTypeModel[]>(`${environment.apiUrl}/insulin/types`);
 	}
 
 	saveInsulin(insulin) {
-		return this.http.post(`${environment.apiUrl}/insulin-diary`, insulin, { headers: this.headers });
+		return this.http.post(`${environment.apiUrl}/insulin`, insulin, { headers: this.headers });
 	}
 }

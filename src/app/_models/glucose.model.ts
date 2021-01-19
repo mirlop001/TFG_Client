@@ -3,7 +3,8 @@ import { Deserializable } from "../_heplers/deseriabizable";
 export class GlucoseModel implements Deserializable {
     id: number;
     glucose: number;
-    comments: string
+    comments: string;
+    createdAt: Date;
 
     deserialize(data: any) {
         Object.assign(this, data);

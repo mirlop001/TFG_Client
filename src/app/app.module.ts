@@ -20,6 +20,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatMomentDateModule} from '@angular/material-moment-adapter';
 
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 
@@ -32,6 +34,7 @@ import { GlucoseDiaryComponent } from './glucose-diary/glucose-diary.component';
 import { ActionMessageComponent } from './_popups/action-message/action-message.component';
 import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.component';
+import { DiaryComponent } from './diary/diary.component';
 
 
 @NgModule({
@@ -47,6 +50,7 @@ import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.co
 		ActionMessageComponent,
 		InsulinDiaryComponent,
 		DiaryTimelineComponent,
+		DiaryComponent,
 	],
 	imports: [
 		MobxAngularModule,
@@ -65,6 +69,8 @@ import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.co
 		MatDividerModule,
 		MatSelectModule,
 		MatListModule,
+		MatDatepickerModule,
+		MatMomentDateModule,
 		NgbModule
 	],
 	providers: [

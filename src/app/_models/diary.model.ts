@@ -1,11 +1,9 @@
 import { Deserializable } from "../_heplers/deseriabizable";
 
-export class InsulinModel implements Deserializable {
-    public _id: string;
+export class DiaryModel implements Deserializable {
     public type: string;
-    public typeName: string;
-    public quantity: number;
-    public createdAt: Date;
+    public date: string;
+	public value: any[]; 
 
     deserialize(data: any) {
         Object.assign(this, data);

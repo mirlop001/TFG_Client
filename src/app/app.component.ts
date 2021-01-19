@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DiaryComponent } from './diary/diary.component';
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 import { GlucoseDiaryComponent } from './glucose-diary/glucose-diary.component';
 import { InsulinDiaryComponent } from './insulin-diary/insulin-diary.component';
 import { ActionResultModel } from './_models/action-result.model';
-import { GlucoseModel } from './_models/glucose.model';
 import { ActionMessageComponent } from './_popups/action-message/action-message.component';
 import { NotificationComponent } from './_popups/notification/notification.component';
 
@@ -40,6 +40,10 @@ export class AppComponent {
 
 			case 'insulin':
 				component = InsulinDiaryComponent;
+				break;
+			
+			case 'diary':
+				component = DiaryComponent;
 				break;
 		}
 

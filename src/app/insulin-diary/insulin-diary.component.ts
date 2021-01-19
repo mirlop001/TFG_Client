@@ -7,6 +7,7 @@ import { ActionResultModel } from '../_models/action-result.model';
 import { ConfirmationModel } from '../_models/confirmation.model';
 
 import * as moment from 'moment'; 
+import { InsulinModel } from '../_models/insulin.model';
 
 @Component({
   selector: 'app-insulin-diary',
@@ -40,23 +41,17 @@ export class InsulinDiaryComponent implements OnInit {
 	}
 
 	openConfirmation() {
-		let newValue =  {
-			type: this.type,
-			quantity: this.quantity
-		};
-
 		let type = this.insulinTypes.find((ins) => { return ins._id == this.type; });
 
-		let confInfo = new ConfirmationModel().deserialize({
-			icon: 'colorize',
-			time: moment().format("hh:mm"),
-			title: "Insulina",
-			values: [`${this.quantity}u. de insulina ${type.name}`]
+		let newValue =  new InsulinModel().deserialize({
+			type: this.type,
+			typeName: type.name,
+			quantity: this.quantity
 		});
 
 		const dialogRef = this.dialog.open(MealConfirmationComponent, {
 			hasBackdrop: true,
-			data: confInfo
+			data: newValue
 		});
 	
 		dialogRef.afterClosed().subscribe(result => {
