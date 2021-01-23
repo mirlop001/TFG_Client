@@ -9,6 +9,8 @@ import { ActionMessageComponent } from '../_popups/action-message/action-message
 import { AuthenticationService } from '../_services/authentication.service';
 import { NotificationComponent } from '../_popups/notification/notification.component';
 import { UserModel } from '../_models/user.model';
+import { ShopComponent } from '../shop/shop.component';
+import { Router } from '@angular/router';
 
 @Component({
 selector: 'app-home',
@@ -26,7 +28,7 @@ export class HomeComponent implements OnInit{
 	
 	coins = 0;
 
-	constructor(private authenticationService: AuthenticationService, public dialog: MatDialog){};
+	constructor(private authenticationService: AuthenticationService, public dialog: MatDialog, private router: Router){};
 
 	ngOnInit() {
 		this.authenticationService.getUserInformation()
@@ -58,6 +60,7 @@ export class HomeComponent implements OnInit{
 			case 'diary':
 				component = DiaryComponent;
 				break;
+				
 		}
 
 		if(component) {
@@ -81,7 +84,6 @@ export class HomeComponent implements OnInit{
 			});
 		}
 	}
-
 	
 	openNotification(component, message?) {
 		return this.dialog.open(component, {
@@ -89,4 +91,9 @@ export class HomeComponent implements OnInit{
 			data: message
 		});
 	}	
+
+	openNewPage(pageName) {
+		this.router.navigate(['shop']);
+
+	}
 }

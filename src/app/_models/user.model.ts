@@ -2,6 +2,8 @@ import { ActionResultModel } from "./action-result.model";
 import { computed } from 'mobx-angular';
 
 export class UserModel {
+    [x: string]: any;
+    public _id: string;
     public name: string;
     public email: string;
     public password: string;

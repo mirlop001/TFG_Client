@@ -15,15 +15,16 @@ export class AuthenticationService {
 	private user = null;
 
 	constructor(private http: HttpClient, private router: Router) {
-        this.userSubj = new BehaviorSubject<UserModel>(JSON.parse(localStorage.getItem('user-logged')));
+        this.user = JSON.parse(localStorage.getItem('user-logged'));
+        this.userSubj = new BehaviorSubject<UserModel>(this.user);
         this.userLogged = this.userSubj.asObservable();
-		this.user = JSON.parse(localStorage.getItem("user-logged")).user;
+        this.user = this.user?.user;
 
 		this.headers = {
 			'Access-Control-Allow-Origin': '*',
 			'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-			'Content-Type': 'application/json',
-			'user': this.user
+            'Content-Type': 'application/json',
+            'user': this.user
 		}
     }
 

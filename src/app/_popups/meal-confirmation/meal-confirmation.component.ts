@@ -1,6 +1,5 @@
-import { Component, Inject, AfterViewInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FoodDiaryComponent } from 'src/app/food-diary/food-diary.component';
 import { ConfirmationModel } from '../../_models/confirmation.model';
 
 @Component({
@@ -8,16 +7,12 @@ import { ConfirmationModel } from '../../_models/confirmation.model';
   templateUrl: './meal-confirmation.component.html',
   styleUrls: ['./meal-confirmation.component.sass']
 })
-export class MealConfirmationComponent implements AfterViewInit {
+export class MealConfirmationComponent {
 
 	constructor(
-		public dialogRef: MatDialogRef<FoodDiaryComponent>,
+		public dialogRef: MatDialogRef<MealConfirmationComponent>,
 		@Inject(MAT_DIALOG_DATA) public data: ConfirmationModel
 	) { }
-
-	ngAfterViewInit(): void {
-	}
-
 	onNoClick(): void {
 		this.dialogRef.close();
 	}

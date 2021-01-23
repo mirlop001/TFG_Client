@@ -18,7 +18,7 @@
 		<ng-container *ngFor="let entry of entries">
 			<app-diary-timeline [data]="entry.value"></app-diary-timeline>
 		</ng-container>
-		<h2 *ngIf="!entries.length" >No hay entradas en este día</h2>
+		<h2 *ngIf="entries && !entries.length" >No hay entradas en este día</h2>
 	</div>
 </div>
 

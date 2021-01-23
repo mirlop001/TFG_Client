@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import { FoodDiaryComponent } from './food-diary/food-diary.component';
 
@@ -39,6 +40,8 @@ import { DiaryComponent } from './diary/diary.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ShopComponent } from './shop/shop.component';
+import { CustomItemConfirmationComponent } from './_popups/custom-item-confirmation/custom-item-confirmation.component';
 
 
 @NgModule({
@@ -58,6 +61,8 @@ import { SignupComponent } from './signup/signup.component';
 		HomeComponent,
 		LoginComponent,
 		SignupComponent,
+		ShopComponent,
+		CustomItemConfirmationComponent,
 	],
 	imports: [
 		MobxAngularModule,
@@ -79,6 +84,7 @@ import { SignupComponent } from './signup/signup.component';
 		MatListModule,
 		MatDatepickerModule,
 		MatMomentDateModule,
+		MatToolbarModule,
 		NgbModule
 	],
 	providers: [

@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FoodCategoryModel } from '../_models/food-category.model';
-import { FoodModel } from '../_models/food.model';
+import { CustomItemTypeModel } from '../_models/custom-item.model';
+import { CustomItemModel } from '../_models/custom-item.model';
 import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FoodService {
+export class CustomItemService {
 	private headers;
 	private user = null;
 
@@ -22,16 +22,16 @@ export class FoodService {
   }
 
   /* FOOD TYPE */
-  getFoodList() {
-	return this.http.get<FoodCategoryModel[]>(`${environment.apiUrl}/food`, { headers: this.headers });
+  getCustomItemTypes() {
+	return this.http.get<CustomItemTypeModel[]>(`${environment.apiUrl}/items/types`, { headers: this.headers });
   }
 
-  getFavourites() {
-	return this.http.get<FoodModel[]>(`${environment.apiUrl}/food/favourites`, { headers: this.headers });
+  getCustomItems() {
+	return this.http.get<CustomItemModel[]>(`${environment.apiUrl}/items`, { headers: this.headers });
   }
 
-  saveFavourites(foodIdList) {
-    return this.http.post<Boolean>(`${environment.apiUrl}/food/favourites`,{ foodList: foodIdList }, { headers: this.headers });
+  buyItems(customItems) {
+    return this.http.post<CustomItemModel[]>(`${environment.apiUrl}/items`, { customItems: customItems }, { headers: this.headers });
   }
   
 }

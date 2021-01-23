@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
 		let { attrName, childAttrName, value } = options;
 		if(!items) return [];
 
-		if(typeof(value)=="string" && !value) return items;
+		if(!value || typeof(value)=="string" && !value) return items;
 		if(typeof(value)=="string") value = value.toLowerCase();
 
 		return items.filter( it => {

@@ -12,7 +12,7 @@
 
 <div mat-dialog-content>
   	<div id="food-list" class="d-flex flex-column" *ngFor="let category of data.foodList">
-		<ng-container *ngIf="category.foodList.length">
+		<ng-container *ngIf="category.foodList && category.foodList.length">
 			<h2 class="p-0">{{ category.name }}</h2>
 
 			<div class="d-flex flex-column">

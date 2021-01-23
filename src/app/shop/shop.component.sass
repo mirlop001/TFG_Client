@@ -1,0 +1,97 @@
+@import '../../_variables'
+@import '../../_animations'
+
+.my-custom-container
+	height: 100vh
+	width: 100vw
+	background-color: var(--background-color)
+
+	.go-home
+		position: absolute
+		left: 1rem
+		font-family: $principal-font
+
+	#coins
+		position: absolute
+		right: 1rem
+		display: flex
+
+		h1
+			margin: auto
+		img
+			max-width: 4rem
+
+	.container
+		height: 90%
+
+		.row.my-container
+			height: 100%
+
+			.items
+				min-height: 55vh
+				background-color: whitesmoke
+				border-radius: 4px
+
+				.item-list-container
+					height: 100%
+					overflow-y: auto
+					overflow-x: hidden
+
+					.custom-item-list
+						display: flex
+						flex-wrap: wrap
+
+						.custom-item
+							img.coin
+								max-width: 1.5rem
+
+						.custom-item.not-founds
+							cursor: not-allowed
+							color: red
+
+							img:not(.coin)
+								background-color: #aaaaaa
+								border-radius: 4px
+								background-color: #ffc5c5
+
+						.custom-item:not(.not-founds)
+							cursor: pointer
+
+							img
+								border-radius: 4px
+
+							img:not(.coin):hover
+								border: 3px solid $secondary !important
+
+						.custom-item.selected
+							color: $primary-hover
+
+							img:not(.coin)
+								border: 3px solid $primary-hover
+								border-radius: 4px
+
+			#preview
+				position: relative
+				height: fit-content
+				margin: auto
+
+				img.previewed-items
+					position: absolute
+					width: 3rem
+					margin-left: auto
+					margin-right: auto
+					left: 0
+					right: 0
+					text-align: center
+
+		@media (max-width: 767px )
+			.my-container
+				padding-top: 0 !important
+
+			.items
+				height: 50% !important
+				max-height: 35vh
+				min-height: 0 !important
+
+				.custom-item
+					width: 50%
