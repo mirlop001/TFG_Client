@@ -42,6 +42,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ShopComponent } from './shop/shop.component';
 import { CustomItemConfirmationComponent } from './_popups/custom-item-confirmation/custom-item-confirmation.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { CustomItemConfirmationComponent } from './_popups/custom-item-confirmat
 		SignupComponent,
 		ShopComponent,
 		CustomItemConfirmationComponent,
+		InventoryComponent,
 	],
 	imports: [
 		MobxAngularModule,

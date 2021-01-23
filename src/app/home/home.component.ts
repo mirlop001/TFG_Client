@@ -6,11 +6,11 @@ import { GlucoseDiaryComponent } from '../glucose-diary/glucose-diary.component'
 import { InsulinDiaryComponent } from '../insulin-diary/insulin-diary.component';
 import { ActionResultModel } from '../_models/action-result.model';
 import { ActionMessageComponent } from '../_popups/action-message/action-message.component';
-import { AuthenticationService } from '../_services/authentication.service';
 import { NotificationComponent } from '../_popups/notification/notification.component';
 import { UserModel } from '../_models/user.model';
 import { Router } from '@angular/router';
 import { CustomItemModel } from '../_models/custom-item.model';
+import { UserService } from '../_services/user.service';
 
 @Component({
 selector: 'app-home',
@@ -29,10 +29,10 @@ export class HomeComponent implements OnInit{
 	
 	coins = 0;
 
-	constructor(private authenticationService: AuthenticationService, public dialog: MatDialog, private router: Router){};
+	constructor(private userService: UserService, public dialog: MatDialog, private router: Router){};
 
 	ngOnInit() {
-		this.authenticationService.getUserInformation()
+		this.userService.getUserInformation()
 		.subscribe((userInfoResponse) => {
 			let userInfo = new UserModel().deserialize(userInfoResponse);
 			this.coins = userInfo.coins;
@@ -95,7 +95,6 @@ export class HomeComponent implements OnInit{
 	}	
 
 	openNewPage(pageName) {
-		this.router.navigate(['shop'], { state: { example: 'bar' } });
-
+		this.router.navigate([pageName]);
 	}
 }

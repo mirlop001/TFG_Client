@@ -16,8 +16,6 @@ export class UserModel {
     deserialize(data: UserModel) {
         Object.assign(this, data);
         
-        console.log(data.customItems);
-
         if(data.customItems) {
             this.customItems = data.customItems.map((selectedCustomItem:any) => {
                 let item = selectedCustomItem.item;

@@ -129,11 +129,9 @@ export class FoodDiaryComponent implements OnInit {
 				
 				this.foodService.saveFavourites(this.favourites)
 					.subscribe((res) => {
-						console.log(res);
 					});
                 this.cdr.detectChanges();
 			}
-			console.log('The dialog was closed');
 		});
 	}
 }

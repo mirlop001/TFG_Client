@@ -1,10 +1,10 @@
 <div class="container">
 	<div id="menu-top">
-		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a vertical three dot icon"  (click)="openNewPage('store')">
+		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a vertical three dot icon" (click)="openNewPage('shop')">
 			<mat-icon>store</mat-icon>
 		</button>
 
-		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon">
+		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon" (click)="openNewPage('inventory')">
 			<mat-icon>inventory_2</mat-icon>
 		</button>
 		
@@ -23,7 +23,7 @@
 			<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
 
 			<ng-container *ngFor="let image of selectedItems">
-				<img class="previewed-items w-100" *ngIf="!image.value" [src]="image.imageSrc">
+				<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="image.imageSrc">
 			</ng-container>
 		</div>
 	</div>

@@ -64,8 +64,4 @@ export class AuthenticationService {
                 })
             );
 	}
-
-	getUserInformation() {
-        return this.http.get<UserModel>(`${environment.apiUrl}/user`, { headers: this.headers });
-	}
 }

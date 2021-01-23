@@ -1,0 +1,55 @@
+<div class="my-custom-container">
+	<mat-toolbar>
+		<button mat-button class="go-home" (click)="goHome()">
+			<mat-icon>chevron_left</mat-icon>
+			Volver
+		</button>
+
+		<h1 class="w-100 text-center">Mi inventario</h1>
+	</mat-toolbar>
+
+	<div class="container">
+		<div class="my-container row p-5">
+			<div id="preview" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0 ">
+				<div class="avatar-img">
+					<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
+
+					<ng-container *ngFor="let image of items">
+						<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="image.imageSrc">
+					</ng-container>
+				</div>
+			</div>
+
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 p-5 items d-flex flex-column">
+				<mat-form-field appearance="fill" class="w-100" name="fieldName" ngDefaultControl>
+					<mat-label>Filtrar por:</mat-label>
+					<mat-select [(ngModel)]="filter">
+					<mat-option>Sin filtros</mat-option>
+					<mat-option *ngFor="let customItemType of customItemTypes" [value]="customItemType._id">{{ customItemType.name }}</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<div class="item-list-container">
+					<div class="custom-item-list">
+						<div class="custom-item col-xl-3 col-lg-3 col-md-4 col-sm-3 col-xs-3 text-center p-3" 
+							*ngFor="let item of items | filter: {attrName: 'type', childAttrName: '_id', value: filter }"
+							[class.selected]="item.inUse">
+
+							<img class="w-100" 
+								[src]="item.imageSrc" 
+								[alt]="item.name" 
+								(click)="onSelected(item)">
+							<span>{{item.name}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="button-actions text-center pt-4">
+					<button mat-raised-button id="total-btn" (click)="openConfirmation()">
+						Guardar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
