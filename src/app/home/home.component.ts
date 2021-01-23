@@ -9,8 +9,8 @@ import { ActionMessageComponent } from '../_popups/action-message/action-message
 import { AuthenticationService } from '../_services/authentication.service';
 import { NotificationComponent } from '../_popups/notification/notification.component';
 import { UserModel } from '../_models/user.model';
-import { ShopComponent } from '../shop/shop.component';
 import { Router } from '@angular/router';
+import { CustomItemModel } from '../_models/custom-item.model';
 
 @Component({
 selector: 'app-home',
@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit{
 	avatarStatuses = ["neutral","sad", "happy"];
 
 	currentAction: ActionResultModel;
+	selectedItems: CustomItemModel[] = [];
 	menuType = null;
 	
 	coins = 0;
@@ -37,6 +38,7 @@ export class HomeComponent implements OnInit{
 			this.coins = userInfo.coins;
 			this.currentAction = userInfo.currentAction;
 			this.avatarStatus = userInfo.avatarStatus;
+			this.selectedItems = [...userInfo.customItems];
 		});
 	}
 
@@ -93,7 +95,7 @@ export class HomeComponent implements OnInit{
 	}	
 
 	openNewPage(pageName) {
-		this.router.navigate(['shop']);
+		this.router.navigate(['shop'], { state: { example: 'bar' } });
 
 	}
 }

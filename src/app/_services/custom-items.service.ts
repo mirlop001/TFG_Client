@@ -31,7 +31,7 @@ export class CustomItemService {
   }
 
   buyItems(customItems) {
-    return this.http.post<CustomItemModel[]>(`${environment.apiUrl}/items`, { customItems: customItems }, { headers: this.headers });
+    return this.http.post<CustomItemModel[]>(`${environment.apiUrl}/items`, customItems, { headers: this.headers });
   }
   
 }

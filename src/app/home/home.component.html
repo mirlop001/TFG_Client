@@ -19,8 +19,12 @@
 	</div>
 
 	<div id="avatar">
-		<div id="avatar-container">
-			<img [src]="('../../assets/avatar/') + avatarStatus + ('.png')">
+		<div class="avatar-img">
+			<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
+
+			<ng-container *ngFor="let image of selectedItems">
+				<img class="previewed-items w-100" *ngIf="!image.value" [src]="image.imageSrc">
+			</ng-container>
 		</div>
 	</div>
 

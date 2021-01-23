@@ -1,5 +1,6 @@
 import { ActionResultModel } from "./action-result.model";
 import { computed } from 'mobx-angular';
+import { CustomItemModel } from "./custom-item.model";
 
 export class UserModel {
     [x: string]: any;
@@ -10,9 +11,25 @@ export class UserModel {
     public token: string;
 	public coins: number;
 	public currentAction: ActionResultModel;
+	public customItems: CustomItemModel[];
 
-    deserialize(data: any) {
+    deserialize(data: UserModel) {
         Object.assign(this, data);
+        
+        console.log(data.customItems);
+
+        if(data.customItems) {
+            this.customItems = data.customItems.map((selectedCustomItem:any) => {
+                let item = selectedCustomItem.item;
+                item.inUse = selectedCustomItem.inUse;
+
+                return new CustomItemModel().deserialize(item);
+            });    
+
+        } else {
+            data.customItems = [];
+        }
+
         return this;
 	}
 	

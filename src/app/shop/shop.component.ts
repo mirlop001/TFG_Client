@@ -25,21 +25,22 @@ export class ShopComponent implements OnInit {
 	constructor( public dialog: MatDialog, private elRef: ElementRef, private router: Router, private customItemService: CustomItemService
 	) {
 		this.initialBackgroundValue = this.elRef.nativeElement.style.getPropertyValue('--background-color');
-		
 	}
 
 	ngOnInit() {
 		let userLogged = JSON.parse(localStorage.getItem('user-logged'));
+
 		if(!userLogged)
 			this.router.navigate(['login']);
 
 		let itemTypes = {};
 
 		this.customItemService.getCustomItems()
-			.subscribe((customItemsResult) => {
+			.subscribe((customItemsResult:any) => {
+				this.currentCoins = customItemsResult.currentCoins;
 
-				if(customItemsResult){
-					customItemsResult.forEach((customItem) => {
+				if(customItemsResult.customItems){
+					customItemsResult.customItems.forEach((customItem) => {
 						let type = itemTypes[customItem.type._id];
 
 						if(!type) {
@@ -65,7 +66,7 @@ export class ShopComponent implements OnInit {
 	}
 
 	onSelected(item: CustomItemModel) {
-		if(item.acquired || item.inUse || item.price < (this.currentCoins - this.total)){
+		if(item.acquired || item.inUse || item.price <= (this.currentCoins - this.total)){
 			let idx = this.selectedItems.findIndex((selectedItem) => {
 				return selectedItem.inUse && (item._id == selectedItem._id || (item.order && selectedItem.order && item.order == selectedItem.order));
 			});
@@ -130,7 +131,10 @@ export class ShopComponent implements OnInit {
 
 	buyCustomItems() {
 		this.customItemService
-			.buyItems(this.selectedItems)
+			.buyItems({
+				selectedItems: this.selectedItems, 
+				total: this.total
+			})
 			.subscribe((response) => {
 				this.goHome();
 			});
