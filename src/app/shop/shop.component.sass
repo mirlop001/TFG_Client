@@ -3,22 +3,30 @@
 
 .my-custom-container
 	height: 100vh
-	width: 100vw
+	width: 100%
 
-	.go-home
-		position: absolute
-		left: 1rem
-		font-family: $principal-font
-
-	#coins
-		position: absolute
-		right: 1rem
-		display: flex
+	.mat-toolbar
+		position: relative
 
 		h1
-			margin: auto
-		img
-			max-width: 4rem
+			color: $secondary
+			font-weight: bold
+			font-size: xx-large
+
+		.go-home
+			position: absolute
+			left: 1rem
+			font-family: $principal-font
+
+		#coins
+			position: absolute
+			right: 1rem
+			display: flex
+
+			h1
+				margin: auto
+			img
+				max-width: 4rem
 
 	.container
 		height: 90%
@@ -30,6 +38,7 @@
 				min-height: 55vh
 				background-color: whitesmoke
 				border-radius: 4px
+				max-height: 80vh
 
 				.item-list-container
 					height: 100%
@@ -49,11 +58,10 @@
 							color: red
 
 							img:not(.coin)
-								background-color: #aaaaaa
 								border-radius: 4px
 								background-color: #ffc5c5
 
-						.custom-item:not(.not-founds)
+						.custom-item:not(.acquired):not(.not-founds)
 							cursor: pointer
 
 							img
@@ -63,16 +71,36 @@
 								border: 3px solid $secondary !important
 
 						.custom-item.selected
-							color: $primary-hover
+							img:not(.coin)
+								border: 3px solid $secondary !important
+								background-color: $secondary-light
+								border-radius: 4px
+
+						.custom-item.acquired
+							h5
+								color: $light-primary
 
 							img:not(.coin)
-								border: 3px solid $primary-hover
+								cursor: not-allowed
+								border: 3px solid $background !important
+								background-color: $light-background
 								border-radius: 4px
+
+				#total-btn
+					width: 100%
+
+					.mat-icon
+						margin-left: 1rem
 
 			#preview
 				position: relative
 				height: fit-content
 				margin: auto
+
+				#img-base
+					z-index: 1
+				img.background-item
+					z-index: -3
 
 				img.previewed-items
 					position: absolute
@@ -87,9 +115,13 @@
 			.my-container
 				padding-top: 0 !important
 
+			#coins
+				right: -2rem !important
+
 			.items
-				height: 50% !important
-				max-height: 35vh
+				height: 60% !important
+				padding: 1rem !important
+				max-height: 50vh !important
 				min-height: 0 !important
 
 				.custom-item

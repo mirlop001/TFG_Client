@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FoodModel } from '../_models/food.model';
 import { MealModel } from '../_models/meal.model';
 import { FoodCategoryModel } from '../_models/food-category.model';
@@ -23,13 +23,18 @@ export class FoodDiaryComponent implements OnInit {
 	favourites: FoodModel[];
 	meals: MealModel[] = [];
 
+	requiredAction: ActionResultModel;
+
 	constructor(
 		public dialogRef: MatDialogRef<FoodDiaryComponent>,
 		public dialog: MatDialog,
 		private foodService: FoodService,
 		private diaryService: DiaryService,
 		private cdr: ChangeDetectorRef,
-	) {}
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) {
+		this.requiredAction = data.requiredAction;
+	}
 
 	ngOnInit() {
 		this.favourites = [];
@@ -85,7 +90,7 @@ export class FoodDiaryComponent implements OnInit {
 	
 		dialogRef.afterClosed().subscribe(result => {
 			if(result) {
-				this.diaryService.saveMeal({ meals: this.meals, mealType: this.selectedMealType })
+				this.diaryService.saveMeal({ meals: this.meals, mealType: this.selectedMealType, requiredAction: this.requiredAction })
 					.subscribe(res => {
 						this.dialogRef.close(new ActionResultModel().deserialize(res));
 					});

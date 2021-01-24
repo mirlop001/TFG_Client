@@ -56,7 +56,21 @@ export class InventoryComponent implements OnInit {
 	}
 
 	onSelected(item: CustomItemModel) {
-		item.inUse = !item.inUse;
+		if(!item.inUse) {
+			let repeatedItem = this.items.find((selectedItem) => {
+				return selectedItem.inUse && selectedItem.order == item.order;
+			});
+
+			if(repeatedItem) {
+				repeatedItem.inUse = false;
+			}
+			
+			item.inUse = true;
+
+		} else {
+			item.inUse = false;
+		}
+
 	}
 
 	changeBg(item) {

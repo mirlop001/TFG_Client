@@ -4,11 +4,12 @@
 
 <div mat-dialog-content class="m-2">
 	<div id="preview">
-		<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
 
 		<ng-container *ngFor="let image of data.selectedItems">
-			<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="image.imageSrc">
+			<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="'../../assets/items/' + image.imageSrc + '.png'" [class.background-item]="image.order==0">
 		</ng-container>
+		
+		<img id="img-base" class="w-100" src="../../assets/avatar/feliz.png">
 	</div>
 
 	<h3 *ngIf="data.coinsLeft != null">Te quedarán {{data.coinsLeft}}<img class="coin" src="../../assets/others/miuro.png">

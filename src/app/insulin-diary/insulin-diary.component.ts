@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MealConfirmationComponent } from '../_popups/meal-confirmation/meal-confirmation.component';
 import { DiaryService } from '../_services/diary.service';
 import { InsulinTypeModel } from '../_models/insulin-types.model';
 import { ActionResultModel } from '../_models/action-result.model';
-import { ConfirmationModel } from '../_models/confirmation.model';
-
-import * as moment from 'moment'; 
 import { InsulinModel } from '../_models/insulin.model';
 
 @Component({
@@ -19,11 +16,16 @@ export class InsulinDiaryComponent implements OnInit {
 	type: string ="option1";
 	quantity: number;
   
+	requiredAction: ActionResultModel;
+
 	constructor(
 		public dialogRef: MatDialogRef<InsulinDiaryComponent>,
 		public dialog: MatDialog,
-		public diaryService: DiaryService
-  ) { }
+		public diaryService: DiaryService,
+		@Inject(MAT_DIALOG_DATA) public data: any
+	) {
+		this.requiredAction = data.requiredAction;
+	 }
   
  	ngOnInit() {
 		this.diaryService.getInsulinTypes()
@@ -46,7 +48,8 @@ export class InsulinDiaryComponent implements OnInit {
 		let newValue =  new InsulinModel().deserialize({
 			type: this.type,
 			typeName: type.name,
-			quantity: this.quantity
+			quantity: this.quantity,
+			requiredAction: this.requiredAction
 		});
 
 		const dialogRef = this.dialog.open(MealConfirmationComponent, {

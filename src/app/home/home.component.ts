@@ -19,13 +19,12 @@ styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit{
 	title = 'Mirlop01tfg';
-
-	avatarStatus = "neutral";
-	avatarStatuses = ["neutral","sad", "happy"];
+	avatarStatus = "neutro.gif";
 
 	currentAction: ActionResultModel;
 	selectedItems: CustomItemModel[] = [];
 	menuType = null;
+	menuOpen: boolean = false;
 	
 	coins = 0;
 
@@ -36,7 +35,7 @@ export class HomeComponent implements OnInit{
 		.subscribe((userInfoResponse) => {
 			let userInfo = new UserModel().deserialize(userInfoResponse);
 			this.coins = userInfo.coins;
-			this.currentAction = userInfo.currentAction;
+			this.currentAction = new ActionResultModel().deserialize(userInfo.currentAction);
 			this.avatarStatus = userInfo.avatarStatus;
 			this.selectedItems = [...userInfo.customItems];
 		});
@@ -44,6 +43,8 @@ export class HomeComponent implements OnInit{
 
 	openDialog(type:string): void {
 		let component; 
+		let dialogData;
+
 		this.menuType = type;
 
 		switch(this.menuType){
@@ -59,27 +60,35 @@ export class HomeComponent implements OnInit{
 				component = InsulinDiaryComponent;
 				break;
 			
-			case 'diary':
-				component = DiaryComponent;
+			case 'actionMessage':
+				let newData = {...this.currentAction};
+				newData.prize = null;
+
+				this.openNotification(ActionMessageComponent, newData);
 				break;
 				
 		}
 
+		if(!dialogData)
+		 	dialogData = { requiredAction: this.currentAction };
+
 		if(component) {
-			const dialogRef = this.openNotification(component);
+			const dialogRef = this.openNotification(component, dialogData);
 		
 			dialogRef.afterClosed().subscribe(result => {
 				this.menuType = null;
 
 				if(result) {
-					if(result instanceof ActionResultModel) {
+					if(result.prize) {
 						this.openNotification(ActionMessageComponent, result);
 						this.coins += result.prize;
-						this.avatarStatus = result.status;
+
+						if(result.status)
+							this.avatarStatus = result.status;
 
 					} else {
 						this.openNotification(NotificationComponent, {
-							message: "¡Guardado con éxito!"
+							message: result.message
 						});
 					}
 				}
@@ -96,5 +105,9 @@ export class HomeComponent implements OnInit{
 
 	openNewPage(pageName) {
 		this.router.navigate([pageName]);
+	}
+
+	openMenu(){
+		this.menuOpen = !this.menuOpen;
 	}
 }

@@ -20,7 +20,8 @@ export class ShopComponent implements OnInit {
 	filter: string;
 
 	selectedItems: CustomItemModel[] = []; 
-	currentCoins: number = 15;
+	currentCoins: number = 0;
+
 
 	constructor( public dialog: MatDialog, private elRef: ElementRef, private router: Router, private customItemService: CustomItemService
 	) {
@@ -66,55 +67,44 @@ export class ShopComponent implements OnInit {
 	}
 
 	onSelected(item: CustomItemModel) {
-		if(item.acquired || item.inUse || item.price <= (this.currentCoins - this.total)){
-			let idx = this.selectedItems.findIndex((selectedItem) => {
-				return selectedItem.inUse && (item._id == selectedItem._id || (item.order && selectedItem.order && item.order == selectedItem.order));
-			});
+		if(!item.acquired) {
 
-			let itemToRemove = this.selectedItems[idx];
+			if(!item.inUse) {
+				let repeatedItem = this.items.find((selectedItem) => {
+					return selectedItem.inUse && selectedItem.order == item.order;
+				});
 
-			if(item.acquired) {
-				if(idx < 0 || this.selectedItems[idx]._id == item._id)
-					item.inUse = idx < 0? true : false;
-				else {
-					item.inUse = true;
-					itemToRemove.inUse = false;
+				if(repeatedItem) {
+					repeatedItem.inUse = false;
 
-					if(itemToRemove.acquired){
-					} else {
-						this.selectedItems.splice(idx, 1);
-						this.total -= itemToRemove.price;
-					}
-				} 
+					if(!repeatedItem.acquired) {
+						let idx = this.selectedItems.findIndex((selectedItem) => {
+							return selectedItem._id == repeatedItem._id;
+						});
 
-			} else {
-				if(idx < 0) {
-					item.inUse = true;
-					this.selectedItems.push(item);
-					this.total += item.price;
-
-				} else {
-					if(itemToRemove._id != item._id){
-						if(itemToRemove.acquired){
-							item.inUse = true;
-							itemToRemove.inUse = false;
-							this.selectedItems.push(item);
-							this.total += item.price;
-
-						} else {
-							item.inUse = false;
+						if(idx >= 0) {
+							this.total -= repeatedItem.price;
 							this.selectedItems.splice(idx, 1);
-							this.total -= item.price;
 						}
-					} else {
-						item.inUse = false;
-						this.selectedItems.splice(idx, 1);
-						this.total -= item.price;
 					}
 				}
+				
+				item.inUse = true;
+				this.total += item.price;
+				this.selectedItems.push(item);
+
+			} else {
+				let idx = this.selectedItems.findIndex((selectedItem) => {
+					return selectedItem._id == item._id;
+				});
+
+				if(idx >= 0)
+					this.selectedItems.splice(idx, 1);
+
+				item.inUse = false;
+				this.total -= item.price;
 			}
 
-			this.changeBg(item);
 		}
 	}
 

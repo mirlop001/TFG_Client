@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentSlide == 'prize'">
+<ng-container *ngIf="data.prize && currentSlide == 'prize'">
 	<div mat-dialog-title>
 		<h1>{{data.title}}</h1>
 	</div>
@@ -20,22 +20,24 @@
 
 </ng-container>
 
-<ng-container *ngIf="currentSlide != 'prize'">
+<ng-container *ngIf="!data.prize || currentSlide != 'prize'">
 	<div mat-dialog-title>
 		<h1>{{data.title}}</h1>
 	</div>
 
 	<div mat-dialog-content>
-		<div class="row d-flex justify-content-center">
-			<img class="avatar" src="../../../assets/avatar/sad.png" alt="Avatar triste por glucemia baja">
+		<div class="row d-flex justify-content-center" *ngIf="data.status">
+			<div class="avatar">
+				<img [src]="'../../../assets/avatar/' + data.status">
+			</div>
 		</div>
 
-		<div class="row">
-			<p *ngIf="data.problem">
+		<div class="row d-flex flex-column">
+			<p class="problem" *ngIf="data.problem">
 				<strong>Problema: </strong> {{ data.problem }}
 			</p>
 			
-			<p *ngIf="data.solution">
+			<p class="solution" *ngIf="data.solution">
 				<strong>Solución: </strong> {{ data.solution }}
 			</p>
 			

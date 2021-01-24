@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { InsulinModel } from '../_models/insulin.model';
 import { GlucoseModel } from '../_models/glucose.model';
 import { MealDiaryModel } from '../_models/meal-diary.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-diary',
@@ -21,63 +22,64 @@ export class DiaryComponent implements OnInit{
 	entries: DiaryModel[] = [];
 
 	constructor(
-		public dialogRef: MatDialogRef<GlucoseDiaryComponent>,
-		public dialog: MatDialog,
 		public diaryService: DiaryService,
-		private cdr: ChangeDetectorRef
+		private cdr: ChangeDetectorRef, 
+		private router: Router
 	) { }
 	
-  ngOnInit() {
-	this.loadDiary(this.date);
-  }
-
-  loadDiary(newDate:Date) {
-	let date = moment(newDate).format("YYYY-MM-DD");
-	this.entries = [];
-
-    this.diaryService.getInsulinDiary(date)
-		.subscribe((insulinDiaryResponse) => {
-			if(insulinDiaryResponse){
-				insulinDiaryResponse.forEach((iDiary) => {
-					this.entries.push(new DiaryModel().deserialize({
-						type: this._types.insulin,
-						date: iDiary.createdAt,
-						value: new InsulinModel().deserialize(iDiary)
-					}));
-				});
-			}
-
-			this.diaryService.getGlucoseDiary(date)
-				.subscribe((glucoseDiaryResponse) => {
-					if(glucoseDiaryResponse){
-						glucoseDiaryResponse.forEach((gDiary) => {
-							this.entries.push(new DiaryModel().deserialize({
-								type: this._types.glucose,
-								date: gDiary.createdAt,
-								value: new GlucoseModel().deserialize(gDiary)
-							}));
-						});
-					}
-
-					this.diaryService.getMealDiary(date)
-						.subscribe((mealDiaryResponse) => {
-							if(mealDiaryResponse) {
-								mealDiaryResponse.forEach((mDiary) => {
-									this.entries.push(new DiaryModel().deserialize({
-										type: this._types.meal,
-										date: mDiary.createdAt,
-										value: new MealDiaryModel().deserialize(mDiary)
-									}));
-								});
-							}
-
-						this.entries = this.entries.sort((a, b) => { return moment(a.date).diff(moment(b.date)); })
-						this.cdr.detectChanges();
-					});
-				});
-		});
-  }
-	onNoClick(): void {
-		this.dialogRef.close();
+	ngOnInit() {
+		this.loadDiary(this.date);
 	}
+
+	loadDiary(newDate:Date) {
+		let date = moment(newDate).format("YYYY-MM-DD");
+		this.entries = [];
+
+		this.diaryService.getInsulinDiary(date)
+			.subscribe((insulinDiaryResponse) => {
+				if(insulinDiaryResponse){
+					insulinDiaryResponse.forEach((iDiary) => {
+						this.entries.push(new DiaryModel().deserialize({
+							type: this._types.insulin,
+							date: iDiary.createdAt,
+							value: new InsulinModel().deserialize(iDiary)
+						}));
+					});
+				}
+
+				this.diaryService.getGlucoseDiary(date)
+					.subscribe((glucoseDiaryResponse) => {
+						if(glucoseDiaryResponse){
+							glucoseDiaryResponse.forEach((gDiary) => {
+								this.entries.push(new DiaryModel().deserialize({
+									type: this._types.glucose,
+									date: gDiary.createdAt,
+									value: new GlucoseModel().deserialize(gDiary)
+								}));
+							});
+						}
+
+						this.diaryService.getMealDiary(date)
+							.subscribe((mealDiaryResponse) => {
+								if(mealDiaryResponse) {
+									mealDiaryResponse.forEach((mDiary) => {
+										this.entries.push(new DiaryModel().deserialize({
+											type: this._types.meal,
+											date: mDiary.createdAt,
+											value: new MealDiaryModel().deserialize(mDiary)
+										}));
+									});
+								}
+
+							this.entries = this.entries.sort((a, b) => { return moment(a.date).diff(moment(b.date)); })
+							this.cdr.detectChanges();
+						});
+					});
+			});
+	}
+
+	goHome() {
+		this.router.navigate(['home']);
+	}
+
 }

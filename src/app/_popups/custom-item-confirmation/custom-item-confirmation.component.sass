@@ -4,6 +4,14 @@
 	margin: auto
 	max-width: 10rem
 
+	#img-base
+		position: relative
+		z-index: 2
+	img.background-item
+		z-index: 1
+	img.previewed-items:not(.background-item)
+		z-index: 3
+
 	img.previewed-items
 		position: absolute
 		width: 3rem

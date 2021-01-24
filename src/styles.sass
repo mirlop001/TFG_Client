@@ -32,7 +32,7 @@ small
 	border-radius: 10px
 
 ::-webkit-scrollbar-thumb
-	background: $primary-hover
+	background: $primary
 	border-radius: 10px
 
 body
@@ -40,6 +40,7 @@ body
 	height: 100vh
 	overflow: hidden
 	min-width: 450px
+	background-color: $background !important
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap'
@@ -54,8 +55,10 @@ body
 		font-weight: bold
 
 	.popover-body
-		max-height: 5rem
 		overflow-y: auto
+
+		.avatar-notification
+			background-color: black
 
 		p
 			font-family: $principal-font !important

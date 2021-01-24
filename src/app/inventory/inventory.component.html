@@ -12,10 +12,11 @@
 		<div class="my-container row p-5">
 			<div id="preview" class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 p-0 ">
 				<div class="avatar-img">
-					<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
+					
+					<img id="img-base" class="w-100" src="../../assets/avatar/neutro.gif">
 
 					<ng-container *ngFor="let image of items">
-						<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="image.imageSrc">
+						<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="'../../assets/items/' + image.imageSrc + '.png'" [class.background-item]="image.order==0">
 					</ng-container>
 				</div>
 			</div>
@@ -36,10 +37,10 @@
 							[class.selected]="item.inUse">
 
 							<img class="w-100" 
-								[src]="item.imageSrc" 
+								[src]="'../../assets/items/' + item.imageSrc + '_prev.png'" 
 								[alt]="item.name" 
 								(click)="onSelected(item)">
-							<span>{{item.name}}</span>
+							<h4>{{item.name}}</h4>
 						</div>
 					</div>
 				</div>

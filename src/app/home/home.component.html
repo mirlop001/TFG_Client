@@ -1,53 +1,102 @@
-<div class="container">
-	<div id="menu-top">
-		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a vertical three dot icon" (click)="openNewPage('shop')">
-			<mat-icon>store</mat-icon>
-		</button>
-
-		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon" (click)="openNewPage('inventory')">
-			<mat-icon>inventory_2</mat-icon>
-		</button>
-		
-		<button mat-fab color="accent" [disabled]="menuType" aria-label="Example icon button with a home icon">
-			<mat-icon>settings</mat-icon>
-		</button>
-	</div>
+<div id="header">
+	<h1>Sokery</h1>
 
 	<div id="coins">
-		<h1>{{ coins }}</h1>
+		<h2>{{ coins }}</h2>
 		<img [src]="('../../assets/others/miuro.png')">
 	</div>
+</div>
 
+<div class="container">
 	<div id="avatar">
+		<div id="avatar-notification" *ngIf="currentAction != null">
+			<img src="../../assets/others/notification_bubble.png" 
+				alt="Avatar notification" (click)="openDialog('actionMessage')">
+		</div>
+
 		<div class="avatar-img">
-			<img id="img-base" class="w-100" src="../../assets/avatar/neutral.png">
+			<img id="img-base" 
+				class="w-100" 
+				[src]="'../../assets/avatar/' + avatarStatus">
 
 			<ng-container *ngFor="let image of selectedItems">
-				<img class="previewed-items w-100" *ngIf="image.inUse && !image.value" [src]="image.imageSrc">
+				<img class="previewed-items w-100" *ngIf="image.inUse && !image.value"  [src]="'../../assets/items/' + image.imageSrc + '.png'" [class.background-item]="image.order==0">
 			</ng-container>
 		</div>
 	</div>
+</div>
 
-	<div id="menu-bottom">
-		<div class="button-row p-3 d-flex justify-content-center">
-			<button color="accent" class="mr-3" mat-fab aria-label="Example icon-button with a heart icon" [disabled]="menuType" (click)="openDialog('food')">
-				<mat-icon>local_dining</mat-icon>
-			</button>
-			
-			<button color="accent" class="mr-3" mat-fab [disabled]="menuType" aria-label="Example icon-button with a heart icon" (click)="openDialog('glucose')">
-				<mat-icon>opacity</mat-icon>
-			</button>
-			
-			<button color="accent" class="mr-3" mat-fab [disabled]="menuType" aria-label="Example icon-button with a heart icon" (click)="openDialog('insulin')">
-				<mat-icon>colorize</mat-icon>
+<div id="navbar">
+	<button mat-button class="menu-btn pt-2 pb-0 ml-2 mr-2" (click)="openNewPage('shop')">
+		<span class="d-flex flex-column text-center">
+			<mat-icon class="m-auto">store</mat-icon>
+			Tienda
+		</span>
+	</button>
+	
+	<button mat-button class="menu-btn pt-2 pb-0 ml-2 mr-2" (click)="openNewPage('inventory')">
+		<span class="d-flex flex-column text-center">
+			<mat-icon class="m-auto">inventory_2</mat-icon>
+			Inventario
+		</span>
+	</button>
+	
+	<div id="annotation-btn" [class.show]="menuOpen" [class.hide]="!menuOpen">
+		<button id="add-annotation" mat-fab color="primary" (click)="openMenu()">
+			<mat-icon>add</mat-icon>
+		</button>
+
+		<div id="annotation-btn-group">
+			<button mat-fab color="primary" (click)="openDialog('food')">
+				<span class="d-flex flex-column text-center">
+					<mat-icon class="m-auto">local_dining</mat-icon>
+					<span class="btn-name mt-3">Comidas</span>
+				</span>
 			</button>
 
-			<button color="primary" class="mr-3" class="diary" [disabled]="menuType" mat-fab aria-label="Example icon-button with a heart icon" (click)="openDialog('diary')">
-				<mat-icon>menu_book</mat-icon>
+			<button class="btn-center" mat-fab color="primary" (click)="openDialog('glucose')">
+				<span class="d-flex flex-column text-center">
+					<mat-icon class="m-auto">opacity</mat-icon>
+					<span class="btn-name mt-3">Glucosa</span>
+				</span>
+			</button>
+
+			<button mat-fab color="primary" (click)="openDialog('insulin')">
+				<span class="d-flex flex-column text-center">
+					<mat-icon class="m-auto">colorize</mat-icon>
+					<span class="btn-name mt-3">Insulina</span>
+				</span>
 			</button>
 		</div>
 	</div>
+	
+	<button mat-button class="menu-btn pt-2 pb-0 ml-2 mr-2" (click)="openNewPage('diary')">
+		<span class="d-flex flex-column text-center">
+			<mat-icon class="m-auto">menu_book</mat-icon>
+			Mi diario
+		</span>
+	</button>
+	
+	<button mat-button class="menu-btn pt-2 pb-0 ml-2 mr-2">
+		<span class="d-flex flex-column text-center">
+			<mat-icon class="m-auto">follow_the_signs</mat-icon>
+			Salir
+		</span>
+	</button>
 
 </div>
 
-	  
+<ng-template #popTitle>
+	<h3>{{ currentAction.title }}</h3>
+</ng-template>
+
+
+<ng-template #popContent>
+	<p class="problem" *ngIf="currentAction.problem">
+		<strong>Problema: </strong> {{ currentAction.problem }}
+	</p>
+	
+	<p class="solution" *ngIf="currentAction.solution">
+		<strong>Solución: </strong> {{ currentAction.solution }}
+	</p>
+</ng-template>

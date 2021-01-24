@@ -13,6 +13,10 @@ export class ActionResultModel implements Deserializable {
 	public isAction: boolean;
 
     deserialize(data: any) {
+        if(data.type) {
+            data = data.type;
+        }
+
         Object.assign(this, data)
         return this;
     }

@@ -2,6 +2,7 @@
 
 .mat-dialog-content
 	padding: 1rem
+	max-width: 50vw
 
 	.row
 		padding: 0 3rem
@@ -11,8 +12,24 @@
 		h1
 			margin: auto 0
 
-		img.avatar
+		.avatar
 			max-width: 15rem
 			border-radius: 100%
-			background-color: $secondary
+			background-color: $light-background
 			margin: 1rem
+			width: 16rem
+			position: relative
+			height: 16rem
+			overflow: hidden
+
+			img
+				max-width: 20rem
+				position: absolute
+				left: -2rem
+				top: 2rem
+
+		.problem
+			color: $dark-primary
+
+		.solution
+			color: $light-primary
