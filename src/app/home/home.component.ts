@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { DiaryComponent } from '../diary/diary.component';
 import { FoodDiaryComponent } from '../food-diary/food-diary.component';
 import { GlucoseDiaryComponent } from '../glucose-diary/glucose-diary.component';
 import { InsulinDiaryComponent } from '../insulin-diary/insulin-diary.component';
@@ -11,6 +10,7 @@ import { UserModel } from '../_models/user.model';
 import { Router } from '@angular/router';
 import { CustomItemModel } from '../_models/custom-item.model';
 import { UserService } from '../_services/user.service';
+import { AuthenticationService } from '../_services/authentication.service';
 
 @Component({
 selector: 'app-home',
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit{
 	
 	coins = 0;
 
-	constructor(private userService: UserService, public dialog: MatDialog, private router: Router){};
+	constructor(private authenticationService: AuthenticationService, private userService: UserService, public dialog: MatDialog, private router: Router){};
 
 	ngOnInit() {
 		this.userService.getUserInformation()
@@ -109,5 +109,9 @@ export class HomeComponent implements OnInit{
 
 	openMenu(){
 		this.menuOpen = !this.menuOpen;
+	}
+
+	logout() {
+		this.authenticationService.logout();
 	}
 }

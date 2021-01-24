@@ -1,3 +1,46 @@
-form
-	.options
-		justify-content: center
+@import '../../_variables'
+
+.container
+	height: 100vh
+	display: flex
+	flex-direction: column
+
+	#title
+		text-align: center
+		margin: 5rem auto 5rem
+
+		h1
+			font-size: 8vh
+			color: $secondary-dark
+			font-weight: bolder
+
+		h2
+			margin-right: 5rem
+			color: $secondary-darker
+			font-style: italic
+
+	.mat-card-header
+		h1
+			font-weight: bold
+			color: $primary
+			text-align: center
+
+		#avatar
+			max-width: 40%
+			background-color: $light-background
+			margin: auto
+			border-radius: 100%
+			overflow: hidden
+			position: relative
+			width: 26rem
+			height: 10rem
+
+			img
+				width: 150%
+				position: absolute
+				left: -2rem
+				top: 0.5rem
+
+	.mat-card
+		margin: 0 auto
+		max-width: 30rem
