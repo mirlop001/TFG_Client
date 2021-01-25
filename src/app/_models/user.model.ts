@@ -32,6 +32,6 @@ export class UserModel {
 	}
 	
     @computed get avatarStatus () {
-        return this.currentAction && this.currentAction.status? this.currentAction.status : 'neutro';
+        return this.currentAction && this.currentAction.status? this.currentAction.status : 'neutro.gif';
     }
 }

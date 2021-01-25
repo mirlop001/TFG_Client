@@ -69,17 +69,19 @@ export class LoginComponent {
 			this.currentAvatarStatus = "oculto.gif";
 
 			setTimeout(() => {
-				self.currentAvatarStatus = "oculto.png";
-				self.isAvatarSeeing = false;
-			}, 800);
+				if(!self.isAvatarSeeing) self.currentAvatarStatus = "oculto.png";
+			}, 300);
+
+			self.isAvatarSeeing = false;
 			
 		} else {
 			this.currentAvatarStatus = "visible.gif"
 			
 			setTimeout(() => {
-				self.currentAvatarStatus = "neutro.gif";
-				self.isAvatarSeeing = true;
-			}, 800);
+				if(self.isAvatarSeeing) self.currentAvatarStatus = "neutro.gif";
+			}, 300);
+
+			self.isAvatarSeeing = true;
 		}
 	}
 }

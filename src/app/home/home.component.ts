@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit{
 
 	ngOnInit() {
 		this.userService.getUserInformation()
-		.subscribe((userInfoResponse) => {
+		.subscribe((userInfoResponse:any) => {
 			let userInfo = new UserModel().deserialize(userInfoResponse);
 			this.coins = userInfo.coins;
-			this.currentAction = new ActionResultModel().deserialize(userInfo.currentAction);
-			this.avatarStatus = userInfo.avatarStatus;
+			this.currentAction = userInfoResponse.currentAction && !userInfoResponse.currentAction.fulfilled? new ActionResultModel().deserialize(userInfo.currentAction) : null;
+			this.avatarStatus = this.currentAction? this.currentAction.status: userInfo.avatarStatus;
 			this.selectedItems = [...userInfo.customItems];
 		});
 	}
@@ -79,12 +79,14 @@ export class HomeComponent implements OnInit{
 				this.menuType = null;
 
 				if(result) {
-					if(result.prize) {
+					if(result.prize || result.problem || result.solution) {
 						this.openNotification(ActionMessageComponent, result);
 						this.coins += result.prize;
 
 						if(result.status)
 							this.avatarStatus = result.status;
+
+						this.currentAction = result.nextAction? result : null;
 
 					} else {
 						this.openNotification(NotificationComponent, {
