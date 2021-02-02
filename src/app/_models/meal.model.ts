@@ -19,6 +19,6 @@ export class MealModel implements Deserializable {
     }
 
     @computed get HCGrams () {
-        return this.foodItem? (this.foodItem.gramsPerCarbRatio * this.grams)/100 : this.grams;
+        return this.foodItem? (Math.floor((this.grams * 10/this.foodItem.gramsPerCarbRatio) * 100) / 100) : this.grams;
     }
 }

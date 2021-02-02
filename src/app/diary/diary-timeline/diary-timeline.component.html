@@ -1,7 +1,8 @@
 <div id="timeline">
-	<div class="row">
+	<div class="row timeline-popover-container">
 		<small>{{info.time}}</small>
 		<button mat-mini-fab class="popover-open" color="primary" aria-label="Example icon button with a menu icon"  
+			data-container="button"
 			[ngbPopover]="popContent"
 			[autoClose]="false" 
 			triggers="manual" 

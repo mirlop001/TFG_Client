@@ -20,7 +20,7 @@ export class DiaryTimelineComponent implements OnInit {
 
 		if(this.data instanceof GlucoseModel){
 			this.info = new ConfirmationModel().deserialize({
-				icon: 'colorize',
+				icon: 'opacity',
 				time: moment(this.data.createdAt).format("hh:mm"),
 				title: "Resultados glucemia",
 				values: [`${this.data.glucose}mg/dL`, this.data.comments]
@@ -28,10 +28,10 @@ export class DiaryTimelineComponent implements OnInit {
 
 		} else if(this.data instanceof InsulinModel){
 			this.info = new ConfirmationModel().deserialize({
-				icon: 'opacity',
+				icon: 'colorize',
 				time: moment(this.data.createdAt).format("hh:mm"),
 				title: "Insulina",
-				values: [`${this.data.quantity}u. de insulina ${this.data.typeName}`]
+				values: [`${this.data.quantity}u. de insulina`]
 			});
 
 		} else if (this.data instanceof MealDiaryModel){
@@ -40,7 +40,7 @@ export class DiaryTimelineComponent implements OnInit {
 
 			this.data.mealList.forEach((meal) => {
 				totalHC += meal.HCGrams;
-				let mealName = meal.foodItem? `${meal.foodItem.name}-`: '';
+				let mealName = meal.foodItem? `${meal.foodItem.name} -`: '';
 
 				messages.push(`${mealName} ${meal.HCGrams}g HC`);
 			});

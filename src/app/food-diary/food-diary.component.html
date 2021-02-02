@@ -20,7 +20,7 @@
 			</div>
 
 			<div *ngFor="let fav of favourites" class="fav-item">
-				<img class="m-1" src="https://picsum.photos/200" alt="{{fav.name}} guardado como favorito" srcset="" (click)="addNewMeal(fav)">
+				<img class="m-1" [src]="'../../../assets/food/' + fav.imageSrc" alt="{{fav.name}} guardado como favorito" srcset="" (click)="addNewMeal(fav)">
 				<p>{{fav.name}}</p>
 			</div>
 		</div>
@@ -50,7 +50,7 @@
 					<!-- <img class=" col-2 p-0 m-1" src="{{meal.foodItem.picture}}" > -->
 					
 					<div class="col-2 p-0">
-						<img class="m-1" src="https://picsum.photos/200" srcset="">
+						<img class="m-1" [src]="'../../../assets/food/' + meal.foodItem.imageSrc" srcset="">
 					</div>
 					<span class="col-4 pr-2">{{ meal.foodItem.name }} </span>
 				

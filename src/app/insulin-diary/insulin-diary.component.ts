@@ -62,6 +62,8 @@ export class InsulinDiaryComponent implements OnInit {
 				this.diaryService.saveInsulin(newValue)
 					.subscribe(res => {
 						this.dialogRef.close(new ActionResultModel().deserialize(res));
+					}, err => {
+						console.log(err);
 					});
 			}
 		});

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://mirlop01tfg.azurewebsites.net/api"
+  apiUrl: "https://sokery-dev.azurewebsites.net/api"
 };

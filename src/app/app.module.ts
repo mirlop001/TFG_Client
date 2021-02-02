@@ -39,7 +39,6 @@ import { DiaryTimelineComponent } from './diary/diary-timeline/diary-timeline.co
 import { DiaryComponent } from './diary/diary.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { ShopComponent } from './shop/shop.component';
 import { CustomItemConfirmationComponent } from './_popups/custom-item-confirmation/custom-item-confirmation.component';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -61,7 +60,6 @@ import { InventoryComponent } from './inventory/inventory.component';
 		DiaryComponent,
 		HomeComponent,
 		LoginComponent,
-		SignupComponent,
 		ShopComponent,
 		CustomItemConfirmationComponent,
 		InventoryComponent,

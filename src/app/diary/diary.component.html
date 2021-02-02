@@ -14,11 +14,16 @@
 		<mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
 		<mat-datepicker touchUi #picker></mat-datepicker>
 	</mat-form-field>
+	<mat-card>
+		<mat-card-content>
+			<div class="diary-entries">
+				<ng-container *ngFor="let entry of entries">
+					<app-diary-timeline [data]="entry.value"></app-diary-timeline>
+				</ng-container>
+				<h2 *ngIf="entries && !entries.length" >No hay entradas en este día</h2>
+			</div>
+			
+		</mat-card-content>
+	</mat-card>
 
-	<div class="diary-entries">
-		<ng-container *ngFor="let entry of entries">
-			<app-diary-timeline [data]="entry.value"></app-diary-timeline>
-		</ng-container>
-		<h2 *ngIf="entries && !entries.length" >No hay entradas en este día</h2>
-	</div>
 </div>

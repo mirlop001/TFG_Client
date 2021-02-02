@@ -7,7 +7,6 @@
 	<mat-card>
 		<div #loginForm *ngIf="isLogin" [@enterAnimation]>
 			<mat-card-header>
-
 				<mat-card-subtitle>
 					<div id="avatar">
 						<img [src]="'../../assets/avatar/' + currentAvatarStatus" alt="Avatar">
@@ -23,7 +22,7 @@
 				<mat-form-field appearance="fill" class="w-100"  color="primary">
 					<mat-label>Email</mat-label>
 					<input matInput placeholder="pat@ejemplo.com" [formControl]="email" required>
-					<mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+					<mat-error *ngIf="email.invalid || loginErrMsg">{{getErrorMessage()}}</mat-error>
 				</mat-form-field>
 
 				<mat-form-field appearance="fill" class="w-100" color="primary">
@@ -34,6 +33,7 @@
 					</button>
 				</mat-form-field>
 
+				<small *ngIf="loginErrMsg" class="mat-error">{{loginErrMsg}}</small>
 				<a mat-button class="w-100" color="primary" (click)="changePage()">¿Aún no tienes cuenta? ¡Regístrate aquí!</a>
 			</mat-card-content>
 
@@ -69,10 +69,12 @@
 					<mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
 					</button>
 				</mat-form-field>
-
+			
 				<mat-form-field appearance="fill" class="w-100" color="primary">
-					<mat-label>Confirma la contraseña</mat-label>
-					<input matInput [formControl]="passwordConfirmation" required>
+					<mat-label>Contraseña</mat-label>
+					<input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordConfirmation" required>
+					<button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+					</button>
 				</mat-form-field>
 
 				<a mat-button class="w-100" color="primary" (click)="changePage()">¿Ya tienes cuenta?</a>
@@ -80,7 +82,7 @@
 
 
 			<mat-card-actions align="center">
-				<button mat-stroked-button color="primary" (click)="submitLogin()">GUARDAR Y ENTRAR</button>
+				<button mat-stroked-button color="primary" (click)="submitSignUp()">GUARDAR Y ENTRAR</button>
 			</mat-card-actions>
 		</div>
 

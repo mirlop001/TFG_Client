@@ -3,9 +3,8 @@ import { Deserializable } from "../_heplers/deseriabizable";
 export class FoodModel implements Deserializable {
     public _id: string;
     public name: string;
-    public description: string;
+    public imageSrc: string;
     public gramsPerCarbRatio: number;
-    public picture: string;
     public createdBy: string;
     public createdAt: Date;
     public categoryId: string;

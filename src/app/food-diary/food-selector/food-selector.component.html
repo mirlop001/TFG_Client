@@ -23,14 +23,12 @@
 
 						<div class="d-flex w-100" (click)="selectFood(food)">
 							<div class="col-md-1  col-sm-2 p-0">
-								<img class="m-1" src="https://picsum.photos/200" srcset="">
+								<img class="m-1" [src]="'../../../assets/food/' + food.imageSrc" srcset="">
 							</div>
+							
 							<h3 class="col-5">{{ food.name }}</h3>
-
-							<span class="col-5 p-0 text-right">{{ food.gramsPerCarbRatio }} g HC/100g</span>
+							<span class="col-5 p-0 text-right">{{ food.gramsPerCarbRatio }} g/Ración de HC</span>
 						</div>
-						
-						<mat-icon class="col-1 p-0"  placement="top" ngbPopover="Vivamus sagittis lacus vel augue laoreet rutrum faucibus." popoverTitle="Popover on top">info_outline</mat-icon>
 					</div>
 				</ng-container>
 			</div>

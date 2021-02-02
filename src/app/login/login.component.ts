@@ -31,7 +31,7 @@ export class LoginComponent {
 	passwordConfirmation: FormControl = new FormControl('', [Validators.required]);
 
 	hide = true;
-	loginErrMsg: string = "";
+	loginErrMsg: string;
 
 	currentAvatarStatus= "neutro.gif";
 	isAvatarSeeing:boolean = true; 
@@ -41,7 +41,7 @@ export class LoginComponent {
 	};
 
 	submitLogin() {
-		this.authenticationService.login({ email: this.email.value, password: this.password.value })
+		this.authenticationService.login({ email: this.email.value.toLowerCase(), password: this.password.value })
 			.subscribe(() => {
 				this.router.navigate(['home']);
 
@@ -55,11 +55,24 @@ export class LoginComponent {
 		return 'Este campo no puede estar vacío';
 	  }
   
-	  return this.email.hasError('email') ? 'Email no válido.' : '';
+	  return this.email.hasError('email') ? 'Email no válido.' : this.loginErrMsg? this.loginErrMsg :'';
 	}
 
 	changePage() {
 		this.isLogin = !this.isLogin;
+	}
+
+	submitSignUp() {
+		this.authenticationService.signUp({
+			name: this.name.value,
+			email: this.email.value,
+			password: this.password.value
+		})
+		.subscribe((loginResponse) => {
+			this.router.navigate(['home']);
+		}, error => {
+			console.error(error);
+		});
 	}
 
 	changeAvatarStatus() {
